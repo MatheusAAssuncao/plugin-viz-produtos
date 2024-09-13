@@ -40,6 +40,8 @@ add_action('elementor/init', 'meu_plugin_carregar_elementor_widget');
 
 // Função para adicionar o menu no admin
 function meu_plugin_adicionar_menu() {
+    // se precisar adicionar este plugin no menu, é essa função.
+    return;
     add_menu_page(
         'Meu Plugin Elementor',    // Título da página
         'Meu Plugin',              // Nome do menu
