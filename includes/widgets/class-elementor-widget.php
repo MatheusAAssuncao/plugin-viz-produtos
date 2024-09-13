@@ -41,7 +41,7 @@ class Meu_Elementor_Widget extends \Elementor\Widget_Base {
         $this->add_control(
             'ordenar_produtos',
             [
-                'label' => __('Ordenar Produtos Por', 'meu-plugin'),
+                'label' => __('Ordenar produtos por', 'meu-plugin'),
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'default' => 'recentes',
                 'options' => [
@@ -49,6 +49,19 @@ class Meu_Elementor_Widget extends \Elementor\Widget_Base {
                     'mais_vendidos' => __('Mais Vendidos', 'meu-plugin'),
                     'preco_maior_menor' => __('Preço: Maior para Menor', 'meu-plugin'),
                     'preco_menor_maior' => __('Preço: Menor para Maior', 'meu-plugin'),
+                ],
+            ]
+        );
+    
+        $this->add_control(
+            'quantidade_linhas',
+            [
+                'label' => __('Quantidade de linhas (3 produtos cada)', 'meu-plugin'),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'default' => '1',
+                'options' => [
+                    '1' => __('1', 'meu-plugin'),
+                    '2' => __('2', 'meu-plugin'),
                 ],
             ]
         );
@@ -62,7 +75,7 @@ class Meu_Elementor_Widget extends \Elementor\Widget_Base {
         // Definir os argumentos padrão da consulta de produtos
         $args = [
             'post_type' => 'product',
-            'posts_per_page' => 6, // Número de produtos a exibir
+            'posts_per_page' => 3, // Número de produtos a exibir
             'orderby' => 'date', // Padrão para produtos recentes
             'order' => 'DESC',
         ];
