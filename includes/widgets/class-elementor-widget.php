@@ -80,7 +80,7 @@ class Meu_Elementor_Widget extends \Elementor\Widget_Base
     protected function render()
     {
         $settings = $this->get_settings_for_display();
-        $paged = get_query_var('paged') ? get_query_var('paged') : 1;
+        // $paged = get_query_var('paged') ? get_query_var('paged') : 1;
 
         // Definir os argumentos padrão da consulta de produtos
         $args = [
@@ -88,7 +88,7 @@ class Meu_Elementor_Widget extends \Elementor\Widget_Base
             'posts_per_page' => ($settings['quantidade_linhas'] * 3), // Número de produtos a exibir
             'orderby' => 'date', // Padrão para produtos recentes
             'order' => 'DESC',
-            'paged' => $paged,
+            // 'paged' => $paged,
         ];
 
         // Modificar a query com base na escolha do usuário
@@ -128,6 +128,7 @@ class Meu_Elementor_Widget extends \Elementor\Widget_Base
                 wc_get_template_part('content', 'product'); // Exibe o template do produto
             }
 
+            /*
             // Adiciona a paginação
             $big = 999999999; // número necessário para evitar conflitos
             echo '<div class="meu-widget-paginacao">';
@@ -140,6 +141,7 @@ class Meu_Elementor_Widget extends \Elementor\Widget_Base
                 'next_text' => 'Próximo &raquo;',
             ));
             echo '</div>';
+            */
 
             echo '</div>';
         } else {
