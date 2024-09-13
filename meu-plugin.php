@@ -78,7 +78,7 @@ function meu_plugin_pagina_admin() {
             ?>
             <table class="form-table">
                 <tr>
-                    <th scope="row"><?php _e('Ordenar Produtos Por', 'meu-plugin'); ?></th>
+                    <th scope="row"><?php _e('Ordenar produtos por', 'meu-plugin'); ?></th>
                     <td>
                         <select name="ordenar_produtos">
                             <option value="recentes" <?php selected($opcao_ordenacao, 'recentes'); ?>><?php _e('Produtos Recentes', 'meu-plugin'); ?></option>
