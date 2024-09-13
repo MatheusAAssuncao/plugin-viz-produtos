@@ -89,6 +89,16 @@ function meu_plugin_pagina_admin() {
                         <p class="description"><?php _e('Escolha como você deseja ordenar os produtos.', 'meu-plugin'); ?></p>
                     </td>
                 </tr>
+                <tr>
+                    <th scope="row"><?php _e('Quantidade de linhas', 'meu-plugin'); ?></th>
+                    <td>
+                        <select name="quantidade_linhas">
+                            <option value="1" <?php selected($quantidade_linhas, '1'); ?>>1</option>
+                            <option value="2" <?php selected($quantidade_linhas, '2'); ?>>2</option>
+                        </select>
+                        <p class="description"><?php _e('Escolha quantas linhas com 3 produtos cada vão aparecer. Se uma, ou se duas linhas.', 'meu-plugin'); ?></p>
+                    </td>
+                </tr>
             </table>
             <?php submit_button(__('Salvar Configurações', 'meu-plugin')); ?>
         </form>
