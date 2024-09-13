@@ -76,7 +76,7 @@ class Meu_Elementor_Widget extends \Elementor\Widget_Base {
         // Definir os argumentos padrão da consulta de produtos
         $args = [
             'post_type' => 'product',
-            'posts_per_page' => ($quantidade_linhas * 2), // Número de produtos a exibir
+            'posts_per_page' => ($quantidade_linhas * 3), // Número de produtos a exibir
             'orderby' => 'date', // Padrão para produtos recentes
             'order' => 'DESC',
         ];
