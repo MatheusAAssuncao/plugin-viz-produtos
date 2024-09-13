@@ -58,12 +58,16 @@ function meu_plugin_pagina_admin() {
         // Salvar as opções selecionadas
         $opcao_ordenacao = isset($_POST['ordenar_produtos']) ? sanitize_text_field($_POST['ordenar_produtos']) : 'recentes';
         update_option('meu_plugin_opcao_ordenacao', $opcao_ordenacao);
+
+        $quantidade_linhas = isset($_POST['quantidade_linhas']) ? sanitize_text_field($_POST['quantidade_linhas']) : '1';
+        update_option('meu_plugin_quantidade_linhas', $quantidade_linhas);
         
         echo '<div class="updated"><p>Configurações salvas.</p></div>';
     }
 
     // Obter a opção de ordenação salva
     $opcao_ordenacao = get_option('meu_plugin_opcao_ordenacao', 'recentes');
+    $quantidade_linhas = get_option('meu_plugin_quantidade_linhas', '1');
     ?>
     <div class="wrap">
         <h1><?php echo esc_html(get_admin_page_title()); ?></h1>
@@ -83,6 +87,16 @@ function meu_plugin_pagina_admin() {
                             <option value="preco_menor_maior" <?php selected($opcao_ordenacao, 'preco_menor_maior'); ?>><?php _e('Preço: Menor para Maior', 'meu-plugin'); ?></option>
                         </select>
                         <p class="description"><?php _e('Escolha como você deseja ordenar os produtos.', 'meu-plugin'); ?></p>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row"><?php _e('Quantidade de linhas', 'meu-plugin'); ?></th>
+                    <td>
+                        <select name="quantidade_linhas">
+                            <option value="1" <?php selected($quantidade_linhas, '1'); ?>>1</option>
+                            <option value="2" <?php selected($quantidade_linhas, '2'); ?>>2</option>
+                        </select>
+                        <p class="description"><?php _e('Escolha quantas linhas com 3 produtos cada vão aparecer. Se uma, ou se duas linhas.', 'meu-plugin'); ?></p>
                     </td>
                 </tr>
             </table>
