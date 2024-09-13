@@ -4,40 +4,48 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class Meu_Elementor_Widget extends \Elementor\Widget_Base {
-    public function __construct($data = [], $args = null) {
+class Meu_Elementor_Widget extends \Elementor\Widget_Base
+{
+    public function __construct($data = [], $args = null)
+    {
         parent::__construct($data, $args);
         wp_register_style('meu-widget-style', plugins_url('../../assets/css/style.css', __FILE__));
     }
-    
-    public function get_style_depends() {
+
+    public function get_style_depends()
+    {
         return ['meu-widget-style'];
     }
 
-    public function get_name() {
+    public function get_name()
+    {
         return 'meu-widget';
     }
 
-    public function get_title() {
+    public function get_title()
+    {
         return __('Meu Widget', 'meu-plugin');
     }
 
-    public function get_icon() {
+    public function get_icon()
+    {
         return 'eicon-star';
     }
 
-    public function get_categories() {
+    public function get_categories()
+    {
         return ['basic'];
     }
 
-    protected function _register_controls() {
+    protected function _register_controls()
+    {
         $this->start_controls_section(
             'section_content',
             [
                 'label' => __('Configurações de Exibição', 'meu-plugin'),
             ]
         );
-    
+
         $this->add_control(
             'ordenar_produtos',
             [
@@ -52,7 +60,7 @@ class Meu_Elementor_Widget extends \Elementor\Widget_Base {
                 ],
             ]
         );
-    
+
         $this->add_control(
             'quantidade_linhas',
             [
@@ -65,12 +73,14 @@ class Meu_Elementor_Widget extends \Elementor\Widget_Base {
                 ],
             ]
         );
-    
+
         $this->end_controls_section();
     }
 
-    protected function render() {
+    protected function render()
+    {
         $settings = $this->get_settings_for_display();
+        $paged = get_query_var('paged') ? get_query_var('paged') : 1;
 
         // Definir os argumentos padrão da consulta de produtos
         $args = [
@@ -78,6 +88,7 @@ class Meu_Elementor_Widget extends \Elementor\Widget_Base {
             'posts_per_page' => ($settings['quantidade_linhas'] * 3), // Número de produtos a exibir
             'orderby' => 'date', // Padrão para produtos recentes
             'order' => 'DESC',
+            'paged' => $paged,
         ];
 
         // Modificar a query com base na escolha do usuário
@@ -116,6 +127,20 @@ class Meu_Elementor_Widget extends \Elementor\Widget_Base {
                 $query->the_post();
                 wc_get_template_part('content', 'product'); // Exibe o template do produto
             }
+
+            // Adiciona a paginação
+            $big = 999999999; // número necessário para evitar conflitos
+            echo '<div class="meu-widget-paginacao">';
+            echo paginate_links(array(
+                'base' => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
+                'format' => '?paged=%#%',
+                'current' => max(1, $paged),
+                'total' => $query->max_num_pages,
+                'prev_text' => '&laquo; Anterior',
+                'next_text' => 'Próximo &raquo;',
+            ));
+            echo '</div>';
+
             echo '</div>';
         } else {
             echo __('Nenhum produto encontrado.', 'meu-plugin');
