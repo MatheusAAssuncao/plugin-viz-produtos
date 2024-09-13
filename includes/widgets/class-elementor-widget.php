@@ -71,12 +71,11 @@ class Meu_Elementor_Widget extends \Elementor\Widget_Base {
 
     protected function render() {
         $settings = $this->get_settings_for_display();
-        $quantidade_linhas = get_option('meu_plugin_quantidade_linhas', '1');
 
         // Definir os argumentos padrão da consulta de produtos
         $args = [
             'post_type' => 'product',
-            'posts_per_page' => ($quantidade_linhas * 3), // Número de produtos a exibir
+            'posts_per_page' => ($settings['quantidade_linhas'] * 3), // Número de produtos a exibir
             'orderby' => 'date', // Padrão para produtos recentes
             'order' => 'DESC',
         ];
