@@ -1,0 +1,93 @@
+.meu-widget-produtos {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+@media (max-width: 1024px) {
+    .meu-widget-produtos {
+        flex-wrap: wrap;
+    }
+}
+
+.meu-widget-produtos li {
+    list-style-type: none;
+}
+
+.meu-widget-produtos span.onsale {
+    display: none;
+}
+
+.meu-widget-produtos img {
+    width: 407px;
+    height: 485px;
+}
+
+.meu-widget-produtos a h2 {
+    /* title */
+    font-family: 'Ogg TRIAL';
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 38px;
+    text-align: left;
+    color: #000000;
+}
+
+.meu-widget-produtos span.price {
+    /* price */
+    font-family: 'Montserrat';
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 32px;
+    text-align: left;
+    color: #000000;
+}
+
+.meu-widget-produtos a.add_to_cart_button {
+    display: none;
+}
+
+.meu-widget-produtos .woocommerce-loop-product__link {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.meu-widget-produtos .viz-comprar-button {
+    width: 100%;
+    background-color: #2D0065;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 32px;
+    text-align: center;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 28px;
+    padding: 7px;
+    opacity: 0;
+}
+    
+@media (max-width: 1024px) {
+    .meu-widget-produtos .viz-comprar-button {
+        opacity: 1;
+    }
+}
+
+.meu-widget-produtos .viz-comprar-button:hover {
+    background-color: #160131;
+}
+    
+.meu-widget-produtos .woocommerce-loop-product__link:hover {
+    .viz-comprar-button {
+        opacity: 1;
+    }
+}
