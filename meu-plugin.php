@@ -27,9 +27,7 @@ class Meu_Plugin_Main {
         add_action('admin_menu', array($this, 'adicionar_menu'));
         
         // Adicionar o hook para o WooCommerce
-        // add_action('woocommerce_after_main_content', array($this, 'render_products_hook'), 20);
-        // Add after the product summary
-        add_action('woocommerce_single_product_summary', array($this, 'render_products_hook'), 20);
+        add_action('woocommerce_after_main_content', array($this, 'render_products_hook'), 20);
         
         // Registrar estilos
         add_action('wp_enqueue_scripts', array($this, 'register_styles'));
