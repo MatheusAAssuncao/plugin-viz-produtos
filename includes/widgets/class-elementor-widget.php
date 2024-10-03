@@ -81,9 +81,9 @@ class Meu_Elementor_Widget extends \Elementor\Widget_Base
 
     public function render_elementor_widget() {
         // Verifica se estamos em uma página de produto único
-        if (!is_product()) {
-            return;
-        }
+        // if (!is_product()) {
+        //     return;
+        // }
 
         // Verifica se o Elementor está ativo
         if (!did_action('elementor/loaded')) {
