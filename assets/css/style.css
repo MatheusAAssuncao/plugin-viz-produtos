@@ -122,4 +122,6 @@ h3.produtos-recentes {
     font-weight: 700;
     line-height: 50px;
     text-align: center;
+    box-shadow: none;
+    text-decoration: none;
 }
