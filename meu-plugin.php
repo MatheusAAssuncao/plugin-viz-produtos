@@ -68,12 +68,17 @@ class Meu_Plugin_Main {
         if (!is_product()) {
             return;
         }
-
+    
         global $product;
+        
+        // Verificar se o produto está definido
+        if (!isset($product) || empty($product->get_id())) {
+            return;
+        }
         
         // Carregar os estilos
         wp_enqueue_style('meu-plugin-style');
-
+    
         // Definir argumentos para a query
         $args = array(
             'post_type' => 'product',
@@ -82,12 +87,13 @@ class Meu_Plugin_Main {
             'order' => 'DESC',
         );
         
-        if (!empty($product->get_id())) {
-            $tags = wc_get_product_tag_terms($product->get_id(), array('fields' => 'ids'));
+        // Obter as tags do produto e excluir o produto atual da consulta
+        $tags = wp_get_post_terms($product->get_id(), 'product_tag', array('fields' => 'ids'));
+        if (!empty($tags)) {
             $args['tag__in'] = $tags;
             $args['post__not_in'] = array($product->get_id());
         }
-
+    
         // Executar a query e renderizar os produtos
         $this->render_products($args);
     }
