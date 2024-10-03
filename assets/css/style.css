@@ -99,3 +99,16 @@
         opacity: 1;
     }
 }
+
+.produtos-recentes-content {
+    --content-width: 1240px;
+    --content-padding: 0 20px;
+    --content-margin: 0 auto;
+}
+h3.produtos-recentes {
+    font-family: 'Ogg TRIAL', serif;
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 50px;
+    text-align: center;
+}
