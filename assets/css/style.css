@@ -99,31 +99,3 @@
         opacity: 1;
     }
 }
-
-
-
-.meu-plugin-wrapper {
-    margin: 40px 0;
-    padding: 20px;
-    background: #fff;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.meu-plugin-produtos {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-}
-
-@media (max-width: 768px) {
-    .meu-plugin-produtos {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 480px) {
-    .meu-plugin-produtos {
-        grid-template-columns: 1fr;
-    }
-}

@@ -128,21 +128,6 @@ class Meu_Elementor_Widget extends \Elementor\Widget_Base
                 wc_get_template_part('content', 'product'); // Exibe o template do produto
             }
 
-            /*
-            // Adiciona a paginação
-            $big = 999999999; // número necessário para evitar conflitos
-            echo '<div class="meu-widget-paginacao">';
-            echo paginate_links(array(
-                'base' => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
-                'format' => '?paged=%#%',
-                'current' => max(1, $paged),
-                'total' => $query->max_num_pages,
-                'prev_text' => '&laquo; Anterior',
-                'next_text' => 'Próximo &raquo;',
-            ));
-            echo '</div>';
-            */
-
             echo '</div>';
         } else {
             echo __('Nenhum produto encontrado.', 'meu-plugin');

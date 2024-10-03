@@ -128,15 +128,12 @@ class Meu_Plugin_Main {
         $query = new WP_Query($args);
 
         if ($query->have_posts()) {
-            echo '<div class="meu-plugin-wrapper">';
-            echo '<div class="meu-plugin-produtos">';
-            
+            echo '<div class="meu-widget-produtos">';
             while ($query->have_posts()) {
                 $query->the_post();
-                wc_get_template_part('content', 'product');
+                wc_get_template_part('content', 'product'); // Exibe o template do produto
             }
-            
-            echo '</div>';
+
             echo '</div>';
         }
 
