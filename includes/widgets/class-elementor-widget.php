@@ -57,6 +57,7 @@ class Meu_Elementor_Widget extends \Elementor\Widget_Base
                     'mais_vendidos' => __('Mais Vendidos', 'meu-plugin'),
                     'preco_maior_menor' => __('Preço: Maior para Menor', 'meu-plugin'),
                     'preco_menor_maior' => __('Preço: Menor para Maior', 'meu-plugin'),
+                    'relacionados' => __('Produtos Relacionados', 'meu-plugin'),
                 ],
             ]
         );
@@ -116,6 +117,7 @@ class Meu_Elementor_Widget extends \Elementor\Widget_Base
                 $args['tag__in'] = $tags;
                 $args['post__not_in'] = [$product->get_id()];
                 break;
+
             case 'recentes':
             default:
                 $args['orderby'] = 'date';

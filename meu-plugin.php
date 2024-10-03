@@ -87,6 +87,7 @@ function meu_plugin_pagina_admin() {
                             <option value="mais_vendidos" <?php selected($opcao_ordenacao, 'mais_vendidos'); ?>><?php _e('Mais Vendidos', 'meu-plugin'); ?></option>
                             <option value="preco_maior_menor" <?php selected($opcao_ordenacao, 'preco_maior_menor'); ?>><?php _e('Preço: Maior para Menor', 'meu-plugin'); ?></option>
                             <option value="preco_menor_maior" <?php selected($opcao_ordenacao, 'preco_menor_maior'); ?>><?php _e('Preço: Menor para Maior', 'meu-plugin'); ?></option>
+                            <option value="relacionados" <?php selected($opcao_ordenacao, 'relacionados'); ?>><?php _e('Produtos Relacionados', 'meu-plugin'); ?></option>
                         </select>
                         <p class="description"><?php _e('Escolha como você deseja ordenar os produtos.', 'meu-plugin'); ?></p>
                     </td>
