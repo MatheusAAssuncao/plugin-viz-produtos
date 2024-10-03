@@ -113,11 +113,11 @@ class Meu_Plugin_Main {
 
             case 'relacionados':
                 global $product;
-                if ($product) {
-                    $tags = wc_get_product_tag_terms($product->get_id(), array('fields' => 'ids'));
-                    $args['tag__in'] = $tags;
-                    $args['post__not_in'] = array($product->get_id());
-                }
+                // if ($product) {
+                //     $tags = wc_get_product_tag_terms($product->get_id(), array('fields' => 'ids'));
+                //     $args['tag__in'] = $tags;
+                //     $args['post__not_in'] = array($product->get_id());
+                // }
                 break;
         }
 
