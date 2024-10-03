@@ -111,6 +111,10 @@
     width: 95%;
     max-width: 1200px;
 }
+.produtos-recentes-content a {
+    box-shadow: none;
+    text-decoration: none;
+}
 @media (max-width: 576px) {
     .produtos-recentes-content {
         width: 90%; /* Um pouco menos de largura em mobile */
@@ -122,6 +126,4 @@ h3.produtos-recentes {
     font-weight: 700;
     line-height: 50px;
     text-align: center;
-    box-shadow: none;
-    text-decoration: none;
 }
