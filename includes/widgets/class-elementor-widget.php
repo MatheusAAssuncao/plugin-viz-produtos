@@ -179,6 +179,7 @@ class Meu_Elementor_Widget extends \Elementor\Widget_Base
     }
 
     // Opcional: Adicionar estilos específicos para esta posição
+    /*
     public function add_custom_styles() {
         if (!is_product()) return;
         ?>
@@ -211,7 +212,8 @@ class Meu_Elementor_Widget extends \Elementor\Widget_Base
         </style>
         <?php
     }
+    */
 }
 
 // Registrar os estilos customizados
-add_action('wp_head', array('Meu_Elementor_Widget', 'add_custom_styles'));
+// add_action('wp_head', array('Meu_Elementor_Widget', 'add_custom_styles'));
