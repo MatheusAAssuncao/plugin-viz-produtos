@@ -76,7 +76,7 @@ class Meu_Plugin_Main {
 
         // Buscar configurações salvas ou usar padrões
         $settings = array(
-            'ordenar_produtos' => 'relacionados',
+            'ordenar_produtos' => 'recentes',
             'quantidade_linhas' => 1
         );
 
