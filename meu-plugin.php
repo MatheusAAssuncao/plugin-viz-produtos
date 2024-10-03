@@ -69,59 +69,27 @@ class Meu_Plugin_Main {
             return;
         }
 
+        global $product;
+        
         // Carregar os estilos
         wp_enqueue_style('meu-plugin-style');
 
-        // Buscar configurações salvas ou usar padrões
-        $settings = array(
-            'ordenar_produtos' => 'relacionados',
-            'quantidade_linhas' => 1
-        );
-
         // Definir argumentos para a query
-        $args = $this->get_products_query_args($settings);
-
-        // Executar a query e renderizar os produtos
-        $this->render_products($args);
-    }
-
-    private function get_products_query_args($settings) {
         $args = array(
             'post_type' => 'product',
-            'posts_per_page' => ($settings['quantidade_linhas'] * 3),
+            'posts_per_page' => 3,
             'orderby' => 'date',
             'order' => 'DESC',
         );
-
-        switch ($settings['ordenar_produtos']) {
-            case 'mais_vendidos':
-                $args['meta_key'] = 'total_sales';
-                $args['orderby'] = 'meta_value_num';
-                break;
-
-            case 'preco_maior_menor':
-                $args['meta_key'] = '_price';
-                $args['orderby'] = 'meta_value_num';
-                $args['order'] = 'DESC';
-                break;
-
-            case 'preco_menor_maior':
-                $args['meta_key'] = '_price';
-                $args['orderby'] = 'meta_value_num';
-                $args['order'] = 'ASC';
-                break;
-
-            case 'relacionados':
-                global $product;
-                if (!empty($product->get_id())) {
-                    $tags = wc_get_product_tag_terms($product->get_id(), array('fields' => 'ids'));
-                    $args['tag__in'] = $tags;
-                    $args['post__not_in'] = array($product->get_id());
-                }
-                break;
+        
+        if (!empty($product->get_id())) {
+            $tags = wc_get_product_tag_terms($product->get_id(), array('fields' => 'ids'));
+            $args['tag__in'] = $tags;
+            $args['post__not_in'] = array($product->get_id());
         }
 
-        return $args;
+        // Executar a query e renderizar os produtos
+        $this->render_products($args);
     }
 
     private function render_products($args) {
