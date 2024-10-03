@@ -102,11 +102,19 @@
 
 .produtos-recentes-session {
     width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+    margin: 40px 0;
 }
 .produtos-recentes-content {
-    --content-width: 1240px;
-    --content-padding: 0 20px;
-    --content-margin: 0 auto;
+    width: 95%;
+    max-width: 1200px;
+}
+@media (max-width: 576px) {
+    .produtos-recentes-content {
+        width: 90%; /* Um pouco menos de largura em mobile */
+    }
 }
 h3.produtos-recentes {
     font-family: 'Ogg TRIAL', serif;
