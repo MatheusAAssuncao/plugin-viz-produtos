@@ -10,7 +10,7 @@ class Meu_Elementor_Widget extends \Elementor\Widget_Base
     {
         parent::__construct($data, $args);
         wp_register_style('meu-widget-style', plugins_url('../../assets/css/style.css', __FILE__));
-        add_action('woocommerce_after_main_content', array($this, 'render_elementor_widget'), 20);
+        add_action('woocommerce_after_single_product', array($this, 'render_elementor_widget'), 20);
     }
 
     public function get_style_depends()
