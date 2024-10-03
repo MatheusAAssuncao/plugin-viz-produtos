@@ -74,8 +74,8 @@ class Meu_Plugin_Main {
 
         // Buscar configurações salvas ou usar padrões
         $settings = array(
-            'ordenar_produtos' => get_option('meu_plugin_opcao_ordenacao', 'recentes'),
-            'quantidade_linhas' => get_option('meu_plugin_quantidade_linhas', '1')
+            'ordenar_produtos' => 'relacionados',
+            'quantidade_linhas' => 1
         );
 
         // Definir argumentos para a query
