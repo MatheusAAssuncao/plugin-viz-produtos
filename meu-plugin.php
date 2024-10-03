@@ -115,7 +115,7 @@ class Meu_Plugin_Main {
                 global $product;
                 if (!empty($product)) {
                     $tags = wc_get_product_tag_terms($product->get_id(), array('fields' => 'ids'));
-                //     $args['tag__in'] = $tags;
+                    $args['tag__in'] = $tags;
                 //     $args['post__not_in'] = array($product->get_id());
                 }
                 break;
