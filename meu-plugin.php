@@ -128,6 +128,7 @@ class Meu_Plugin_Main {
         $query = new WP_Query($args);
 
         if ($query->have_posts()) {
+            echo '<div class="produtos-recentes-session">';
             echo '<div class="produtos-recentes-content">';
             echo '<h3 class="produtos-recentes">Você também vai gostar</h3>';
             echo '<div class="meu-widget-produtos">';
@@ -136,7 +137,7 @@ class Meu_Plugin_Main {
                 wc_get_template_part('content', 'product'); // Exibe o template do produto
             }
 
-            echo '</div></div>';
+            echo '</div></div></div>';
         }
 
         wp_reset_postdata();
