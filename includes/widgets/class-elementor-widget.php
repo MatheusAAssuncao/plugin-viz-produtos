@@ -10,6 +10,7 @@ class Meu_Elementor_Widget extends \Elementor\Widget_Base
     {
         parent::__construct($data, $args);
         wp_register_style('meu-widget-style', plugins_url('../../assets/css/style.css', __FILE__));
+        add_action('woocommerce_after_single_product', array($this, 'render_elementor_widget'), 15);
     }
 
     public function get_style_depends()
@@ -76,6 +77,32 @@ class Meu_Elementor_Widget extends \Elementor\Widget_Base
         );
 
         $this->end_controls_section();
+    }
+
+    public function render_elementor_widget() {
+        // Verifica se o Elementor está ativo
+        if (!did_action('elementor/loaded')) {
+            return;
+        }
+
+        // Nome da classe do seu widget
+        $widget_class = 'Meu_Elementor_Widget';
+        
+        // Configurações do widget (as mesmas que você usa no Elementor)
+        $settings = [
+            'ordenar_produtos' => 'relacionados',
+            'quantidade_linhas' => '1',
+        ];
+
+        echo '<div class="elementor-widget-container produtos-customizados">';
+        
+        // Método 1: Renderizar widget diretamente
+        \Elementor\Plugin::instance()->widgets_manager->get_widget_types($widget_class)->render_content($settings);
+        
+        // OU Método 2: Se você preferir usar um shortcode
+        // echo do_shortcode('[seu-shortcode-aqui]');
+        
+        echo '</div>';
     }
 
     protected function render()
