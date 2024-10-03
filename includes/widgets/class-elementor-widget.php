@@ -10,7 +10,6 @@ class Meu_Elementor_Widget extends \Elementor\Widget_Base
     {
         parent::__construct($data, $args);
         wp_register_style('meu-widget-style', plugins_url('../../assets/css/style.css', __FILE__));
-        add_action('woocommerce_after_single_product', array($this, 'render_elementor_widget'), 20);
     }
 
     public function get_style_depends()
@@ -58,7 +57,6 @@ class Meu_Elementor_Widget extends \Elementor\Widget_Base
                     'mais_vendidos' => __('Mais Vendidos', 'meu-plugin'),
                     'preco_maior_menor' => __('Preço: Maior para Menor', 'meu-plugin'),
                     'preco_menor_maior' => __('Preço: Menor para Maior', 'meu-plugin'),
-                    'relacionados' => __('Produtos Relacionados', 'meu-plugin'),
                 ],
             ]
         );
@@ -79,45 +77,18 @@ class Meu_Elementor_Widget extends \Elementor\Widget_Base
         $this->end_controls_section();
     }
 
-    public function render_elementor_widget() {
-        // Verifica se estamos em uma página de produto único
-        // if (!is_product()) {
-        //     return;
-        // }
-
-        // Verifica se o Elementor está ativo
-        if (!did_action('elementor/loaded')) {
-            return;
-        }
-
-        echo '<div class="elementor-widget-container produtos-customizados">';
-        
-        // Configurações padrão do widget
-        $settings = [
-            'ordenar_produtos' => 'relacionados',
-            'quantidade_linhas' => '1',
-        ];
-
-        // Renderizar o conteúdo do widget
-        echo '<div class="meu-widget-wrapper">';
-        $this->render_content($settings);
-        echo '</div>';
-        
-        echo '</div>';
-    }
-
-    protected function render_content($settings = null) {
-        // Se não foram passadas configurações, pegar as configurações do Elementor
-        if (!$settings) {
-            $settings = $this->get_settings_for_display();
-        }
+    protected function render()
+    {
+        $settings = $this->get_settings_for_display();
+        // $paged = get_query_var('paged') ? get_query_var('paged') : 1;
 
         // Definir os argumentos padrão da consulta de produtos
         $args = [
             'post_type' => 'product',
-            'posts_per_page' => ($settings['quantidade_linhas'] * 3),
-            'orderby' => 'date',
+            'posts_per_page' => ($settings['quantidade_linhas'] * 3), // Número de produtos a exibir
+            'orderby' => 'date', // Padrão para produtos recentes
             'order' => 'DESC',
+            // 'paged' => $paged,
         ];
 
         // Modificar a query com base na escolha do usuário
@@ -139,15 +110,6 @@ class Meu_Elementor_Widget extends \Elementor\Widget_Base
                 $args['order'] = 'ASC';
                 break;
 
-            case 'relacionados':
-                global $product;
-                if ($product) {
-                    $tags = wc_get_product_tag_terms($product->get_id(), ['fields' => 'ids']);
-                    $args['tag__in'] = $tags;
-                    $args['post__not_in'] = [$product->get_id()];
-                }
-                break;
-
             case 'recentes':
             default:
                 $args['orderby'] = 'date';
@@ -163,57 +125,29 @@ class Meu_Elementor_Widget extends \Elementor\Widget_Base
             echo '<div class="meu-widget-produtos">';
             while ($query->have_posts()) {
                 $query->the_post();
-                wc_get_template_part('content', 'product');
+                wc_get_template_part('content', 'product'); // Exibe o template do produto
             }
+
+            /*
+            // Adiciona a paginação
+            $big = 999999999; // número necessário para evitar conflitos
+            echo '<div class="meu-widget-paginacao">';
+            echo paginate_links(array(
+                'base' => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
+                'format' => '?paged=%#%',
+                'current' => max(1, $paged),
+                'total' => $query->max_num_pages,
+                'prev_text' => '&laquo; Anterior',
+                'next_text' => 'Próximo &raquo;',
+            ));
+            echo '</div>';
+            */
+
             echo '</div>';
         } else {
             echo __('Nenhum produto encontrado.', 'meu-plugin');
         }
 
-        wp_reset_postdata();
+        wp_reset_postdata(); // Reseta a query do WordPress
     }
-
-    // Sobrescrever o método render original para usar render_content
-    protected function render() {
-        $this->render_content();
-    }
-
-    // Opcional: Adicionar estilos específicos para esta posição
-    /*
-    public function add_custom_styles() {
-        if (!is_product()) return;
-        ?>
-        <style>
-            .meu-widget-wrapper {
-                margin: 40px 0;
-                padding: 20px;
-                background: #fff;
-                border-radius: 5px;
-                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            }
-
-            .meu-widget-produtos {
-                display: grid;
-                grid-template-columns: repeat(3, 1fr);
-                gap: 20px;
-            }
-
-            @media (max-width: 768px) {
-                .meu-widget-produtos {
-                    grid-template-columns: repeat(2, 1fr);
-                }
-            }
-
-            @media (max-width: 480px) {
-                .meu-widget-produtos {
-                    grid-template-columns: 1fr;
-                }
-            }
-        </style>
-        <?php
-    }
-    */
 }
-
-// Registrar os estilos customizados
-// add_action('wp_head', array('Meu_Elementor_Widget', 'add_custom_styles'));
