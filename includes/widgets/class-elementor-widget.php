@@ -110,6 +110,12 @@ class Meu_Elementor_Widget extends \Elementor\Widget_Base
                 $args['order'] = 'ASC';
                 break;
 
+            case 'relacionados':
+                global $product;
+                $tags = wc_get_product_tag_terms($product->get_id(), ['fields' => 'ids']);
+                $args['tag__in'] = $tags;
+                $args['post__not_in'] = [$product->get_id()];
+                break;
             case 'recentes':
             default:
                 $args['orderby'] = 'date';
