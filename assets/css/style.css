@@ -26,12 +26,12 @@
     flex-grow: 0;
     max-width: calc(33.333% - 20px);
     list-style-type: none;
+    justify-content: center;
 }
 @media screen and (max-width: 768px) {
     .viz-widget-produtos li {
         flex-basis: calc(100% - 20px) !important;
         max-width: calc(100% - 20px) !important;
-        justify-content: center !important;
     }
 }
 .viz-widget-produtos span.onsale {
