@@ -20,10 +20,10 @@
 }
 
 .viz-widget-produtos li {
-    flex-basis: calc(33.333% - 20px);
+    /* flex-basis: calc(33.333% - 20px);
     flex-grow: 0;
     max-width: calc(33.333% - 20px);
-    list-style-type: none;
+    list-style-type: none; */
 }
 @media screen and (max-width: 768px) {
     .viz-widget-produtos li {
