@@ -95,7 +95,7 @@
 @media (max-width: 768px) {
     .viz-widget-produtos .viz-comprar-button {
         opacity: 1;
-        width: 407px;
+        width: min(407px, 100%) !important;
     }
 }
 
