@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Meu Plugin Elementor
+Plugin Name: Viz Plugin Produtos Elementor
 Description: Plugin com um widget customizado para o Elementor e uma página administrativa no WordPress.
 Version: 1.0
 Author: Seu Nome
@@ -10,7 +10,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class Meu_Plugin_Main {
+class Viz_Plugin_Produtos_Main {
     private static $instance = null;
     private $widget_instance = null;
 
@@ -46,17 +46,17 @@ class Meu_Plugin_Main {
     }
 
     public function registrar_widget() {
-        $this->widget_instance = new \Meu_Elementor_Widget();
+        $this->widget_instance = new \Viz_Produtos_Elementor_Widget();
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type($this->widget_instance);
     }
 
     public function elementor_nao_encontrado() {
-        echo '<div class="error"><p>O plugin "Meu Plugin Elementor" requer o Elementor. Por favor, ative o Elementor antes de usar este plugin.</p></div>';
+        echo '<div class="error"><p>O plugin "Viz Plugin Produtos Elementor" requer o Elementor. Por favor, ative o Elementor antes de usar este plugin.</p></div>';
     }
 
     public function register_styles() {
         wp_register_style(
-            'meu-plugin-style',
+            'viz-plugin-style',
             plugins_url('assets/css/style.css', __FILE__),
             array(),
             '1.0.0'
@@ -77,7 +77,7 @@ class Meu_Plugin_Main {
         }
         
         // Carregar os estilos
-        wp_enqueue_style('meu-plugin-style');
+        wp_enqueue_style('viz-plugin-style');
     
         // Definir argumentos para a query
         $args = array(
@@ -105,7 +105,7 @@ class Meu_Plugin_Main {
             echo '<div class="produtos-recentes-session">';
             echo '<div class="produtos-recentes-content">';
             echo '<h3 class="produtos-recentes">Você também vai gostar</h3>';
-            echo '<div class="meu-widget-produtos">';
+            echo '<div class="viz-widget-produtos">';
             while ($query->have_posts()) {
                 $query->the_post();
                 wc_get_template_part('content', 'product'); // Exibe o template do produto
@@ -123,9 +123,9 @@ class Meu_Plugin_Main {
 }
 
 // Inicializar o plugin
-function meu_plugin_init() {
-    return Meu_Plugin_Main::get_instance();
+function viz_plugin_produtos_init() {
+    return Viz_Plugin_Produtos_Main::get_instance();
 }
 
 // Iniciar o plugin
-add_action('plugins_loaded', 'meu_plugin_init');
+add_action('plugins_loaded', 'viz_plugin_produtos_init');

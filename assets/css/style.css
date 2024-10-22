@@ -1,4 +1,4 @@
-.meu-widget-produtos {
+.viz-widget-produtos {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -8,34 +8,34 @@
 }
 
 /* Para garantir que a última linha tenha alinhamento consistente */
-.meu-widget-produtos::after {
+.viz-widget-produtos::after {
     content: "";
     flex: 0 1 calc(33.333% - 20px);
 }
 
 @media (max-width: 1024px) {
-    .meu-widget-produtos {
+    .viz-widget-produtos {
         flex-wrap: wrap;
     }
 }
 
-.meu-widget-produtos li {
+.viz-widget-produtos li {
     flex-basis: calc(33.333% - 20px);
     flex-grow: 0;
     max-width: calc(33.333% - 20px);
     list-style-type: none;
 }
 
-.meu-widget-produtos span.onsale {
+.viz-widget-produtos span.onsale {
     display: none;
 }
 
-.meu-widget-produtos img {
+.viz-widget-produtos img {
     width: 407px;
     height: 485px;
 }
 
-.meu-widget-produtos a h2 {
+.viz-widget-produtos a h2 {
     /* title */
     font-family: 'Ogg TRIAL';
     font-size: 24px;
@@ -45,7 +45,7 @@
     color: #000000;
 }
 
-.meu-widget-produtos span.price {
+.viz-widget-produtos span.price {
     /* price */
     font-family: 'Montserrat';
     font-size: 24px;
@@ -55,18 +55,18 @@
     color: #000000;
 }
 
-.meu-widget-produtos a.add_to_cart_button {
+.viz-widget-produtos a.add_to_cart_button {
     display: none;
 }
 
-.meu-widget-produtos .woocommerce-loop-product__link {
+.viz-widget-produtos .woocommerce-loop-product__link {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
 }
 
-.meu-widget-produtos .viz-comprar-button {
+.viz-widget-produtos .viz-comprar-button {
     width: 100%;
     background-color: #2D0065;
     color: white;
@@ -85,16 +85,16 @@
 }
 
 @media (max-width: 1024px) {
-    .meu-widget-produtos .viz-comprar-button {
+    .viz-widget-produtos .viz-comprar-button {
         opacity: 1;
     }
 }
 
-.meu-widget-produtos .viz-comprar-button:hover {
+.viz-widget-produtos .viz-comprar-button:hover {
     background-color: #160131;
 }
 
-.meu-widget-produtos .woocommerce-loop-product__link:hover {
+.viz-widget-produtos .woocommerce-loop-product__link:hover {
     .viz-comprar-button {
         opacity: 1;
     }
