@@ -16,6 +16,8 @@
 @media (max-width: 1024px) {
     .viz-widget-produtos {
         flex-wrap: wrap;
+        margin-top: 50px;
+        justify-content: center;
     }
 }
 
@@ -89,9 +91,10 @@
     opacity: 0;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 768px) {
     .viz-widget-produtos .viz-comprar-button {
         opacity: 1;
+        width: calc(100% - 20px);
     }
 }
 
