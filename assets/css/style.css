@@ -25,7 +25,7 @@
     max-width: calc(33.333% - 20px);
     list-style-type: none;
 }
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
     .viz-widget-produtos li {
         flex-basis: calc(100% - 20px);
         max-width: calc(100% - 20px);
