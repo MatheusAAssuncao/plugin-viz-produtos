@@ -10,11 +10,65 @@ class Viz_Produtos_Elementor_Widget extends \Elementor\Widget_Base
     {
         parent::__construct($data, $args);
         wp_register_style('viz-widget-style', plugins_url('../../assets/css/style.css', __FILE__));
+        wp_register_script('viz-widget-script', plugins_url('../../assets/js/script.js', __FILE__), ['jquery'], false, true);
+        // Localizar a variável ajaxurl
+        wp_localize_script('viz-widget-script', 'ajax_object', [
+            'ajax_url' => admin_url('admin-ajax.php')
+        ]);
+
+        // Registrar actions
+        $this->register_ajax_actions();
+    }
+
+    private function register_ajax_actions()
+    {
+        add_action('wp_ajax_load_more_products', [$this, 'load_more_products']);
+        add_action('wp_ajax_nopriv_load_more_products', [$this, 'load_more_products']);
+    }
+
+    public function load_more_products()
+    {
+        // Verificar o nonce para segurança (opcional)
+        check_ajax_referer('load_more_nonce', 'nonce');
+
+        // Obter a página solicitada
+        $page = intval($_POST['page']);
+
+        // Definir os argumentos da query
+        $args = [
+            'post_type' => 'product',
+            'posts_per_page' => 6,
+            'paged' => $page,
+        ];
+
+        // Executar a query de produtos
+        $query = new WP_Query($args);
+
+        // Loop de exibição dos produtos
+        if ($query->have_posts()) {
+            while ($query->have_posts()) {
+                $query->the_post();
+                wc_get_template_part('content', 'product'); // Exibe o template do produto
+            }
+        } else {
+            echo '<p>No more products found</p>';
+        }
+
+        // Restaurar a query global do WordPress
+        wp_reset_postdata();
+
+        // Finalizar a execução do script
+        wp_die();
     }
 
     public function get_style_depends()
     {
         return ['viz-widget-style'];
+    }
+
+    public function get_script_depends()
+    {
+        return ['viz-widget-script'];
     }
 
     public function get_name()
@@ -127,8 +181,8 @@ class Viz_Produtos_Elementor_Widget extends \Elementor\Widget_Base
                 $query->the_post();
                 wc_get_template_part('content', 'product'); // Exibe o template do produto
             }
-
             echo '</div>';
+            echo '<button id="load-more">Carregar mais</button>';
         } else {
             echo __('Nenhum produto encontrado.', 'viz-plugin-produtos');
         }
