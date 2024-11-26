@@ -129,6 +129,7 @@ class Viz_Produtos_Elementor_Widget extends \Elementor\Widget_Base
             }
 
             echo '</div>';
+            echo '<button id="load-more">Carregar mais</button>';
         } else {
             echo __('Nenhum produto encontrado.', 'viz-plugin-produtos');
         }
