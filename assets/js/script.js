@@ -4,7 +4,7 @@ jQuery(document).ready(function($) {
         var page = button.data("page");
         var postsPerPage = button.data("posts-per-page");
         console.log(ajax_object.ajax_url)
-        console.log(ajax_object.viz_products_nonce)
+        console.log(ajax_object.nonce)
         // $.ajax({
         //     url: ajax_object.ajax_url,
         //     type: "POST",
