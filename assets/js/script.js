@@ -22,8 +22,8 @@ jQuery(document).ready(function($) {
                 }
             },
             error: function(response) {
-                response = JSON.parse(response.responseText)
-                console.log("Error: " + response)
+                console.log('Error')
+                console.log(response)
             }
         })
     })
