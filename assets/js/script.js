@@ -3,6 +3,7 @@ jQuery(document).ready(function($) {
         var button = $(this);
         var page = button.data("page");
         var postsPerPage = button.data("posts-per-page");
+        console.log(ajax_object.ajax_url)
         console.log(ajax_object.viz_products_nonce)
         $.ajax({
             url: ajax_object.ajax_url,
