@@ -3,7 +3,7 @@ jQuery(document).ready(function($) {
         var button = $(this)
         var page = button.data("page")
         var postsPerPage = button.data("posts-per-page")
-        console.log(ajax_object.viz_products_nonce)
+        console.log(ajax_object.nonce)
         return
         $.ajax({
             url: ajax_object.ajax_url,
@@ -12,7 +12,7 @@ jQuery(document).ready(function($) {
                 action: "load_more_products",
                 page: page + 1,
                 posts_per_page: postsPerPage,
-                nonce: ajax_object.viz_products_nonce
+                nonce: ajax_object.nonce
             },
             success: function(response) {
                 if (response) {
