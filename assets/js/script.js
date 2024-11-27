@@ -19,6 +19,9 @@ jQuery(document).ready(function($) {
                 } else {
                     button.text("No more products").prop("disabled", true);
                 }
+            },
+            error: function(response) {
+                console.log("Error: " + response);
             }
         });
     });
