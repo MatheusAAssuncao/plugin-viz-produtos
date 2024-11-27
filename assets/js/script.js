@@ -4,7 +4,7 @@ jQuery(document).ready(function($) {
         var page = button.data("page");
         var postsPerPage = button.data("posts-per-page");
         $.ajax({
-            url: "' . admin_url('admin-ajax.php') . '",
+            url: ajax_url,
             type: "POST",
             data: {
                 action: "load_more_products",
