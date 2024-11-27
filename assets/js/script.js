@@ -8,7 +8,7 @@ jQuery(document).ready(function($) {
             url: ajax_object.ajax_url,
             type: "POST",
             data: {
-                action: "load_more_products",
+                action: "load_more_products_from_ajax",
                 page: page + 1,
                 posts_per_page: postsPerPage,
                 nonce: ajax_object.nonce
