@@ -22,7 +22,7 @@ jQuery(document).ready(function($) {
                 }
             },
             error: function(response) {
-                response = JSON.parse(response)
+                response = JSON.parse(response.responseText)
                 console.log("Error: " + response)
             }
         })
