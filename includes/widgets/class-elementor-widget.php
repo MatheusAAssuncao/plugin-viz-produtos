@@ -30,7 +30,7 @@ class Viz_Produtos_Elementor_Widget extends \Elementor\Widget_Base
     public function load_more_products()
     {
         check_ajax_referer('viz_products_nonce', 'nonce');
-
+        echo "okk"; wp_die();
         $page = intval($_POST['page']);
         $posts_per_page = intval($_POST['posts_per_page']);
 
