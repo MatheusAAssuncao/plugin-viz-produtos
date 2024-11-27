@@ -32,6 +32,7 @@ class Viz_Plugin_Produtos_Main {
         // Registrar estilos
         add_action('wp_enqueue_scripts', array($this, 'register_styles'));
 
+        // Adicionar ação para carregar mais produtos via AJAX
         add_action('wp_ajax_load_more_products_from_ajax', [$this, 'load_more_products_from_ajax']);
         add_action('wp_ajax_nopriv_load_more_products_from_ajax', [$this, 'load_more_products_from_ajax']);
     }
@@ -39,6 +40,10 @@ class Viz_Plugin_Produtos_Main {
     public function load_more_products_from_ajax()
     {
         check_ajax_referer('viz_products_nonce', 'nonce');
+        wp_send_json(false);
+        if (empty($_POST['page']) || empty($_POST['posts_per_page'])) {
+            wp_send_json(false);
+        }
 
         $page = intval($_POST['page']);
         $posts_per_page = intval($_POST['posts_per_page']);
