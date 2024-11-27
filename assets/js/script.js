@@ -3,8 +3,7 @@ jQuery(document).ready(function($) {
         var button = $(this)
         var page = button.data("page")
         var postsPerPage = button.data("posts-per-page")
-        console.log(ajax_object.nonce)
-        return
+
         $.ajax({
             url: ajax_object.ajax_url,
             type: "POST",
