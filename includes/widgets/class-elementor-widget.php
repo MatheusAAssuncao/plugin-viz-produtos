@@ -132,7 +132,7 @@ class Viz_Produtos_Elementor_Widget extends \Elementor\Widget_Base
         $settings = $this->get_settings_for_display();
         // $paged = get_query_var('paged') ? get_query_var('paged') : 1;
 
-        $posts_per_page = $settings['quantidade_linhas'] * 3;
+        $posts_per_page = ($settings['quantidade_linhas'] ?? 1) * 3;
         // Definir os argumentos padrão da consulta de produtos
         $args = [
             'post_type' => 'product',
