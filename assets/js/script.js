@@ -1,8 +1,10 @@
 jQuery(document).ready(function($) {
     $("#load-more-products").on("click", function() {
-        var button = $(this);
-        var page = button.data("page");
-        var postsPerPage = button.data("posts-per-page");
+        var button = $(this)
+        var page = button.data("page")
+        var postsPerPage = button.data("posts-per-page")
+        console.log(ajax_object.viz_products_nonce)
+        return
         $.ajax({
             url: ajax_object.ajax_url,
             type: "POST",
@@ -14,15 +16,15 @@ jQuery(document).ready(function($) {
             },
             success: function(response) {
                 if (response) {
-                    $(".viz-widget-produtos").append(response);
-                    button.data("page", page + 1);
+                    $(".viz-widget-produtos").append(response)
+                    button.data("page", page + 1)
                 } else {
-                    button.text("No more products").prop("disabled", true);
+                    button.text("No more products").prop("disabled", true)
                 }
             },
             error: function(response) {
-                console.log("Error: " + response);
+                console.log("Error: " + response)
             }
-        });
-    });
-});
+        })
+    })
+})
