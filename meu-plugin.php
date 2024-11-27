@@ -40,9 +40,10 @@ class Viz_Plugin_Produtos_Main {
     public function load_more_products_from_ajax()
     {
         check_ajax_referer('viz_products_nonce', 'nonce');
-        wp_send_json(false);
+
         if (empty($_POST['page']) || empty($_POST['posts_per_page'])) {
-            wp_send_json(false);
+            wp_send_json_error(['message' => 'Missing parameters']);
+            wp_die();
         }
 
         $page = intval($_POST['page']);
@@ -50,8 +51,8 @@ class Viz_Plugin_Produtos_Main {
 
         $args = [
             'post_type' => 'product',
-            'posts_per_page' => $posts_per_page,
             'paged' => $page,
+            'posts_per_page' => $posts_per_page,
             'orderby' => 'date',
             'order' => 'DESC',
         ];

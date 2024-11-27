@@ -98,6 +98,7 @@ class Viz_Produtos_Elementor_Widget extends \Elementor\Widget_Base
         // Definir os argumentos padrão da consulta de produtos
         $args = [
             'post_type' => 'product',
+            'paged' => 1,
             'posts_per_page' => $posts_per_page, // Número de produtos a exibir
             'orderby' => 'date', // Padrão para produtos recentes
             'order' => 'DESC',
