@@ -9,6 +9,10 @@ class Viz_Produtos_Elementor_Widget extends \Elementor\Widget_Base
     public function __construct($data = [], $args = null)
     {
         parent::__construct($data, $args);
+
+        // Registrar actions
+        $this->register_ajax_actions();
+        
         wp_register_style('viz-widget-style', plugins_url('../../assets/css/style.css', __FILE__));
         wp_register_script('viz-widget-script', plugins_url('../../assets/js/script.js', __FILE__), ['jquery'], false, true);
         // Localizar a variável ajaxurl
@@ -16,9 +20,6 @@ class Viz_Produtos_Elementor_Widget extends \Elementor\Widget_Base
             'ajax_url' => admin_url('admin-ajax.php'),
             'nonce' => wp_create_nonce('viz_products_nonce'),
         ]);
-
-        // Registrar actions
-        $this->register_ajax_actions();
     }
 
     private function register_ajax_actions()
