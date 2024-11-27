@@ -29,8 +29,8 @@ class Viz_Produtos_Elementor_Widget extends \Elementor\Widget_Base
 
     public function load_more_products()
     {
-        check_ajax_referer('viz_products_nonce', 'nonce');
         wp_send_json_error(array('message' => 'Teste'));
+        check_ajax_referer('viz_products_nonce', 'nonce');
         $page = intval($_POST['page']);
         $posts_per_page = intval($_POST['posts_per_page']);
 
@@ -179,7 +179,7 @@ class Viz_Produtos_Elementor_Widget extends \Elementor\Widget_Base
                 wc_get_template_part('content', 'product'); // Exibe o template do produto
             }
             echo '</div>';
-            echo '<button id="load-more" data-page="1" data-posts-per-page="' . $posts_per_page . '">Carregar mais</button>';
+            echo '<button id="load-more-products" data-page="1" data-posts-per-page="' . $posts_per_page . '">Carregar mais</button>';
         } else {
             echo __('Nenhum produto encontrado.', 'viz-plugin-produtos');
         }

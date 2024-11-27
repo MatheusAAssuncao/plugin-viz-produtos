@@ -1,5 +1,5 @@
 jQuery(document).ready(function($) {
-    $("#load-more").on("click", function() {
+    $("#load-more-products").on("click", function() {
         var button = $(this);
         var page = button.data("page");
         var postsPerPage = button.data("posts-per-page");
