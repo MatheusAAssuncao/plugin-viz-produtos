@@ -10,9 +10,6 @@ class Viz_Produtos_Elementor_Widget extends \Elementor\Widget_Base
     {
         parent::__construct($data, $args);
 
-        // Registrar actions
-        $this->register_ajax_actions();
-        
         wp_register_style('viz-widget-style', plugins_url('../../assets/css/style.css', __FILE__));
         wp_register_script('viz-widget-script', plugins_url('../../assets/js/script.js', __FILE__), ['jquery'], false, true);
         // Localizar a variável ajaxurl
@@ -20,42 +17,6 @@ class Viz_Produtos_Elementor_Widget extends \Elementor\Widget_Base
             'ajax_url' => admin_url('admin-ajax.php'),
             'nonce' => wp_create_nonce('viz_products_nonce'),
         ]);
-    }
-
-    private function register_ajax_actions()
-    {
-        add_action('wp_ajax_load_more_products', [$this, 'load_more_products']);
-        add_action('wp_ajax_nopriv_load_more_products', [$this, 'load_more_products']);
-    }
-
-    public function load_more_products()
-    {
-        check_ajax_referer('viz_products_nonce', 'nonce');
-        wp_send_json_error(array('message' => 'Teste'));
-        $page = intval($_POST['page']);
-        $posts_per_page = intval($_POST['posts_per_page']);
-
-        $args = [
-            'post_type' => 'product',
-            'posts_per_page' => $posts_per_page,
-            'paged' => $page,
-            'orderby' => 'date',
-            'order' => 'DESC',
-        ];
-
-        $query = new WP_Query($args);
-
-        if ($query->have_posts()) {
-            while ($query->have_posts()) {
-                $query->the_post();
-                wc_get_template_part('content', 'product'); // Exibe o template do produto
-            }
-        } else {
-            wp_send_json(false);
-        }
-
-        wp_reset_postdata();
-        wp_die();
     }
 
     public function get_style_depends()

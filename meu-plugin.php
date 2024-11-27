@@ -31,8 +31,41 @@ class Viz_Plugin_Produtos_Main {
         
         // Registrar estilos
         add_action('wp_enqueue_scripts', array($this, 'register_styles'));
+
+        add_action('wp_ajax_load_more_products', [$this, 'load_more_products']);
+        add_action('wp_ajax_nopriv_load_more_products', [$this, 'load_more_products']);
     }
 
+    public function load_more_products()
+    {
+        check_ajax_referer('viz_products_nonce', 'nonce');
+        wp_send_json_error(array('message' => 'Teste'));
+        $page = intval($_POST['page']);
+        $posts_per_page = intval($_POST['posts_per_page']);
+
+        $args = [
+            'post_type' => 'product',
+            'posts_per_page' => $posts_per_page,
+            'paged' => $page,
+            'orderby' => 'date',
+            'order' => 'DESC',
+        ];
+
+        $query = new WP_Query($args);
+
+        if ($query->have_posts()) {
+            while ($query->have_posts()) {
+                $query->the_post();
+                wc_get_template_part('content', 'product'); // Exibe o template do produto
+            }
+        } else {
+            wp_send_json(false);
+        }
+
+        wp_reset_postdata();
+        wp_die();
+    }
+    
     public function init_elementor_widget() {
         // Verificar se o Elementor está ativo
         if (!did_action('elementor/loaded')) {
