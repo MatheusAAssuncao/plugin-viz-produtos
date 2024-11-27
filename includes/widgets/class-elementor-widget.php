@@ -13,7 +13,8 @@ class Viz_Produtos_Elementor_Widget extends \Elementor\Widget_Base
         wp_register_script('viz-widget-script', plugins_url('../../assets/js/script.js', __FILE__), ['jquery'], false, true);
         // Localizar a variável ajaxurl
         wp_localize_script('viz-widget-script', 'ajax_object', [
-            'ajax_url' => admin_url('admin-ajax.php')
+            'ajax_url' => admin_url('admin-ajax.php'),
+            'nonce' => wp_create_nonce('viz_products_nonce'),
         ]);
 
         // Registrar actions
@@ -28,6 +29,8 @@ class Viz_Produtos_Elementor_Widget extends \Elementor\Widget_Base
 
     public function load_more_products()
     {
+        check_ajax_referer('viz_products_nonce', 'nonce');
+
         $page = intval($_POST['page']);
         $posts_per_page = intval($_POST['posts_per_page']);
 

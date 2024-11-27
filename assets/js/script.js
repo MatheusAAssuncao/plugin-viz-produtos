@@ -9,7 +9,8 @@ jQuery(document).ready(function($) {
             data: {
                 action: "load_more_products",
                 page: page + 1,
-                posts_per_page: postsPerPage
+                posts_per_page: postsPerPage,
+                nonce: ajax_object.viz_products_nonce
             },
             success: function(response) {
                 if (response) {
