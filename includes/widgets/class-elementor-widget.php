@@ -28,36 +28,29 @@ class Viz_Produtos_Elementor_Widget extends \Elementor\Widget_Base
 
     public function load_more_products()
     {
-        // Verificar o nonce para segurança (opcional)
-        check_ajax_referer('load_more_nonce', 'nonce');
-
-        // Obter a página solicitada
         $page = intval($_POST['page']);
+        $posts_per_page = intval($_POST['posts_per_page']);
 
-        // Definir os argumentos da query
         $args = [
             'post_type' => 'product',
-            'posts_per_page' => 6,
+            'posts_per_page' => $posts_per_page,
             'paged' => $page,
+            'orderby' => 'date',
+            'order' => 'DESC',
         ];
 
-        // Executar a query de produtos
         $query = new WP_Query($args);
 
-        // Loop de exibição dos produtos
         if ($query->have_posts()) {
             while ($query->have_posts()) {
                 $query->the_post();
                 wc_get_template_part('content', 'product'); // Exibe o template do produto
             }
         } else {
-            echo '<p>No more products found</p>';
+            wp_send_json(false);
         }
 
-        // Restaurar a query global do WordPress
         wp_reset_postdata();
-
-        // Finalizar a execução do script
         wp_die();
     }
 
@@ -136,10 +129,11 @@ class Viz_Produtos_Elementor_Widget extends \Elementor\Widget_Base
         $settings = $this->get_settings_for_display();
         // $paged = get_query_var('paged') ? get_query_var('paged') : 1;
 
+        $posts_per_page = $settings['quantidade_linhas'] * 3;
         // Definir os argumentos padrão da consulta de produtos
         $args = [
             'post_type' => 'product',
-            'posts_per_page' => ($settings['quantidade_linhas'] * 3), // Número de produtos a exibir
+            'posts_per_page' => $posts_per_page, // Número de produtos a exibir
             'orderby' => 'date', // Padrão para produtos recentes
             'order' => 'DESC',
             // 'paged' => $paged,
@@ -182,7 +176,7 @@ class Viz_Produtos_Elementor_Widget extends \Elementor\Widget_Base
                 wc_get_template_part('content', 'product'); // Exibe o template do produto
             }
             echo '</div>';
-            echo '<button id="load-more">Carregar mais</button>';
+            echo '<button id="load-more" data-page="1" data-posts-per-page="' . $posts_per_page . '">Carregar mais</button>';
         } else {
             echo __('Nenhum produto encontrado.', 'viz-plugin-produtos');
         }
