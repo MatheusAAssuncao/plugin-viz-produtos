@@ -41,7 +41,7 @@
 
 .viz-widget-produtos img {
     width: 407px;
-    height: 485px;
+    height: auto;
 }
 
 .viz-widget-produtos a h2 {
