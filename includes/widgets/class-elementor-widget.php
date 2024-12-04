@@ -70,6 +70,7 @@ class Viz_Produtos_Elementor_Widget extends \Elementor\Widget_Base
                 'options' => [
                     '1' => __('1', 'viz-plugin-produtos'),
                     '2' => __('2', 'viz-plugin-produtos'),
+                    'all' => __('all', 'viz-plugin-produtos'),
                 ],
             ]
         );
@@ -80,12 +81,17 @@ class Viz_Produtos_Elementor_Widget extends \Elementor\Widget_Base
     protected function render()
     {
         $settings = $this->get_settings_for_display();
-        // $paged = get_query_var('paged') ? get_query_var('paged') : 1;
+        $post_per_page = 1;
+        if (!empty($settings['quantidade_linhas']) && $settings['quantidade_linhas'] == 'all') {
+            $post_per_page = -1;
+        } else {
+            $post_per_page = $settings['quantidade_linhas'] * 3;
+        }
 
         // Definir os argumentos padrão da consulta de produtos
         $args = [
             'post_type' => 'product',
-            'posts_per_page' => ($settings['quantidade_linhas'] * 3), // Número de produtos a exibir
+            'posts_per_page' => $post_per_page, // Número de produtos a exibir
             'orderby' => 'date', // Padrão para produtos recentes
             'order' => 'DESC',
             // 'paged' => $paged,

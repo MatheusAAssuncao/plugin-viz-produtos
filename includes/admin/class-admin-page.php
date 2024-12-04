@@ -6,7 +6,7 @@ if (!defined('ABSPATH')) {
 
 class Viz_Plugin_Produtos_Admin_Page {
     public function __construct() {
-        add_action('admin_menu', array($this, 'add_plugin_page'));
+        // add_action('admin_menu', array($this, 'add_plugin_page'));
     }
 
     public function add_plugin_page() {

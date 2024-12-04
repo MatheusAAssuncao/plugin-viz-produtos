@@ -24,7 +24,7 @@ class Viz_Plugin_Produtos_Main {
     private function __construct() {
         // Inicializar o plugin
         add_action('elementor/init', array($this, 'init_elementor_widget'));
-        add_action('admin_menu', array($this, 'adicionar_menu'));
+        // add_action('admin_menu', array($this, 'adicionar_menu'));
         
         // Adicionar o hook para o WooCommerce
         add_action('woocommerce_after_main_content', array($this, 'render_products_hook'), 20);
